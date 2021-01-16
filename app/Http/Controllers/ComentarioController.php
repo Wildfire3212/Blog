@@ -7,7 +7,7 @@ use App\Models\Comentario;
 use App\Models\Articulo;
 use App\Models\User;
 
-class CommentController extends Controller
+class ComentarioController extends Controller
 {
     /**
      * Store a newly created resource in storage.

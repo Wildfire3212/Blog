@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Articulo;
 use App\User;
-use App\Comentario;
+use App\Categoria;
 use App\Comentario;
 
-class ArticleController extends Controller
+class ArticuloController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,7 +19,8 @@ class ArticleController extends Controller
     {
         // OBTENER TODOS LOS DATOS DEL MODELO ARTÍCULO
         $articulos = Articulo::all();
-        return view('admin.articulos.index',['articulos'=>$articulos]);
+        $categorias = Categoria::all();
+        return view('admin.articulos.index',['articulos'=>$articulos],['categorias' =>$categorias ]);
     }
 
     /**
@@ -31,7 +32,9 @@ class ArticleController extends Controller
     {
         //Función a llamar cuando se quiera crear un artículo
         // Se retornará una vista, la cual es un formulario.
-        return view('admin.articulos.create');
+        $categorias = Categoria::all();
+        return view('admin.articulos.create',['categorias'=>$categorias]);
+
     }
 
     /**
@@ -44,14 +47,14 @@ class ArticleController extends Controller
     {
         //LA QUE REALIZA LA ACCIÓN DE "CREAR"
         $article = new Articulo();
-        $article->author_id = $request->author_id;
+        $article->author_id = auth()->user()->id; 
 
         $user = User::findOrFail($article->author_id);
         $article->categoria_id = $request->categoria_id;
         $user = Categoria::findOrFail($article->categoria_id);
         $article->author_name = $user->name;
         $article->title = $request->title;
-        $article->category = $request->category;
+
         $article->description = $request->description;
         $article->content = $request->content;
         $article->img = $request->img;
@@ -68,7 +71,7 @@ class ArticleController extends Controller
 
         $article->save();
 
-        return redirect('AdminArticulos');
+        return view('admin.articulos.index');
     }
 
     /**

@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\User;
+use App\Articulo;
+use App\Http\Controllers\HomeController; 
+use App\Categoria; 
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +18,34 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+   	$articulos_recientes = Articulo::latest()
+	 ->take(3)
+	 ->get();
+	return view('welcome',['recientes' => $articulos_recientes]);
+})->name('main');
+
+
+Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
+
+
+	Route::resource('AdminArticulos','App\Http\Controllers\ArticuloController');
+	Route::resource('AdminCategorias','App\Http\Controllers\CategoriaController');
+
+
+
+Route::resource('show','App\Http\Controllers\showController');
+
+Route::resource('comment','App\Http\Controllers\CommentarioController');
+
+Route::get('/profile/{id}', function($id){
+	$user = User::findOrFail($id);
+	return view('profile',['user' => $user]);
 });
 
-Auth::routes();
+Route::get('categorias', function(){
+	$categorias = Categoria::all();
+	return view('admin.articulos.index',['categorias'=>$categorias]);
+})->name('index.categorias');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();

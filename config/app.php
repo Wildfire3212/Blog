@@ -14,6 +14,10 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
+    'main' => 'Bienvenido',
+    'admin' => 'Administrador',
+    'edit' => 'Edita una tarea',
+    'create' => 'Crea una tarea',
 
     /*
     |--------------------------------------------------------------------------

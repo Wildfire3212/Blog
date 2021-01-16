@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Categoria;
+use App\Categoria;
 
 
 class CategoriaController extends Controller
@@ -29,7 +29,7 @@ class CategoriaController extends Controller
     {
         //Función a llamar cuando se quiera crear un artículo
         // Se retornará una vista, la cual es un formulario.
-        return view('admin.categorias.create');
+        return view('admin.categoria.create');
     }
 
     /**
@@ -43,7 +43,8 @@ class CategoriaController extends Controller
         //LA QUE REALIZA LA ACCIÓN DE "CREAR"
         $categoria = new Categoria();
         $categoria->nombre = $request->nombre;
-        return redirect('AdminCategorias');
+        $categoria->save(); 
+        return redirect('AdminArticulos');
     }
 
     /**
@@ -54,6 +55,7 @@ class CategoriaController extends Controller
      */
     public function show($id)
     {
+
 
     }
 
