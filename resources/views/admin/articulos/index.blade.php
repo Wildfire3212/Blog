@@ -29,7 +29,7 @@
           <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
             <div class="card" style="width: 18rem;">
               <div class="card-body">
-                <img src="{{asset("$articulo->img")}}" class="card-img-top" alt="reciente02">
+                <img src="{{asset("img/$articulo->img")}}" class="card-img-top" alt="reciente02">
               </div>
               <div class="card-body">
                 <h5 class="card-title text-center" style="color: #ffff">{{$articulo->title}}</h5>

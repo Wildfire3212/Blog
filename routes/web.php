@@ -21,21 +21,22 @@ Route::get('/', function () {
    	$articulos_recientes = Articulo::latest()
 	 ->take(3)
 	 ->get();
-	return view('welcome',['recientes' => $articulos_recientes]);
+	 $categorias = Categoria::all();
+	return view('welcome',['recientes' => $articulos_recientes, 'categorias' => $categorias]);
 })->name('main');
 
 
 Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
 
 
-	Route::resource('AdminArticulos','App\Http\Controllers\ArticuloController');
-	Route::resource('AdminCategorias','App\Http\Controllers\CategoriaController');
+Route::resource('AdminArticulos','App\Http\Controllers\ArticuloController');
+Route::resource('AdminCategorias','App\Http\Controllers\CategoriaController');
 
 
 
 Route::resource('show','App\Http\Controllers\showController');
 
-Route::resource('comment','App\Http\Controllers\CommentarioController');
+Route::resource('comment','App\Http\Controllers\ComentarioController');
 
 Route::get('/profile/{id}', function($id){
 	$user = User::findOrFail($id);

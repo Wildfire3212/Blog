@@ -106,14 +106,17 @@
                 <h6 class="card-subtitle mb-2 text-muted text-center">Autor: <a class="card-link" href="{{route('show.edit',$articulo->author_id)}}">{{$articulo->author_name}}</a></h6><br>
                 <p class="card-text text-center" style="color: #ffff">{{$articulo->description}}</p>
                 <h6 class="d-inline-block card-subtitle text-muted">Categoría:</h6>
-               
-                <a href="#">Sin categoría</a>
-         
+                @foreach($categorias as $categoria)
+                @if($categoria->id==$articulo->categoria_id)
+                <a href="{{route('AdminArticulos.index')}}">{{$categoria->nombre}}</a>
+                @endif
+                @endforeach
                 <a href="{{route('show.show', $articulo->id)}}" class="card-link">Ver más</a>
               </div>
             </div>
           </div>
         </div>
+        
         @endforeach
     </section>
    </main>

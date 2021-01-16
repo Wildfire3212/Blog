@@ -20,7 +20,7 @@ class ArticuloController extends Controller
         // OBTENER TODOS LOS DATOS DEL MODELO ARTÍCULO
         $articulos = Articulo::all();
         $categorias = Categoria::all();
-        return view('admin.articulos.index',['articulos'=>$articulos],['categorias' =>$categorias ]);
+        return view('admin.articulos.index',['articulos'=>$articulos],['categorias' =>$categorias]);
     }
 
     /**
@@ -48,13 +48,9 @@ class ArticuloController extends Controller
         //LA QUE REALIZA LA ACCIÓN DE "CREAR"
         $article = new Articulo();
         $article->author_id = auth()->user()->id; 
-
-        $user = User::findOrFail($article->author_id);
         $article->categoria_id = $request->categoria_id;
-        $user = Categoria::findOrFail($article->categoria_id);
-        $article->author_name = $user->name;
+        $article->author_name = auth()->user()->name;
         $article->title = $request->title;
-
         $article->description = $request->description;
         $article->content = $request->content;
         $article->img = $request->img;
@@ -94,7 +90,8 @@ class ArticuloController extends Controller
     public function edit($id)
     {
         $articulo = Articulo::findOrFail($id);
-        return view('admin.articulos.edit',['articulo'=>$articulo]);
+        $categorias = Categoria::all();
+        return view('admin.articulos.edit',['articulo'=>$articulo,'categorias'=>$categorias]);
     }
 
     /**
@@ -111,7 +108,6 @@ class ArticuloController extends Controller
         $article->author_id = $request->author_id;
         $article->categoria_id = $request->categoria_id;
         $article->title = $request->title;
-        $article->category = $request->category;
         $article->description = $request->description;
         $article->content = $request->content;
 

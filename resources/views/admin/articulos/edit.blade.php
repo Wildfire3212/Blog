@@ -34,9 +34,13 @@
 				@endif
 				<div class="form-group">
 					<div class="d-flex justify-content-left">
-						<label class="col-md-8 col-form-label text-md-left" for="category">Categoría: </label>
+						<label class="col-md-8 col-form-label text-md-left" for="categoria_id ">Categoría: </label>
 					</div>
-					<input class="form-control" type="text" name="category" required value="{{$articulo->category}}">
+					<select class="form-control" name="categoria_id">
+							@foreach($categorias as $categoria)
+							<option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
+							@endforeach
+					</select>
 				</div>
 				<div class="form-group">
 					<div class="d-flex justify-content-left">

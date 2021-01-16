@@ -31,13 +31,7 @@
 
         <p class="lead">
         	categoría 
-        	@if($articulo->category == "varonil")
-        	<a href="">Baloncesto masculino</a>
-        	@elseif($articulo->category == "femenil")
-        	<a href="">Baloncesto femenino</a>
-        	@else
-        	<a href="#">Sin categoría</a>
-        	@endif
+        	<a href="{{route('AdminArticulos.index')}}">{{$categoria->nombre}}</a>
         </p>
 
         <hr>

@@ -21,7 +21,7 @@
 				<div class="form-group">
 					<div class="d-flex justify-content-left" for="categoria_id" id="categoria">
 						<label for="categoria_id">Seleccione una categoria de las siguientes:</label>
-						<select class="form-control" id="sel1">
+						<select class="form-control" name="categoria_id">
 							@foreach($categorias as $categoria)
 							<option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
 							@endforeach

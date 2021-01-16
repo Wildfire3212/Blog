@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Comentario;
-use App\Models\Articulo;
-use App\Models\User;
+use App\Comentario;
+use App\Articulo;
+use App\User;
 
 class ComentarioController extends Controller
 {

@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Articulo;
-use App\Models\User;
-use App\Models\Comentario;
-use App\Models\Categoria;
+use App\Articulo;
+use App\User;
+use App\Comentario;
+use App\Categoria;
 
 class showController extends Controller
 {
@@ -20,20 +20,10 @@ class showController extends Controller
     {
         $articulo = Articulo::findOrFail($id);
         $autor = User::findOrFail($articulo->author_id);
+        $categoria = Categoria::findOrFail($articulo->categoria_id);
         $comentarios = Comentario::all();
-        return view('publicacion',['articulo' => $articulo,'autor' => $autor,'comentarios' => $comentarios]);
+        return view('publicacion',['articulo' => $articulo,'autor' => $autor,'comentarios' => $comentarios,'categoria' => $categoria]);
     }
-
-    public function showCategorias($id)
-    {
-        $categoria = Categoria::findOrFail($id);
-        $articulo = Articulo::findOrFail($articulo->categoria_id);
-        $autor = User::findOrFail($articulo->author_id);
-        $comentarios = Comentario::all();
-        return view('publicacion',['articulo' => $articulo,'autor' => $autor,'comentarios' => $comentarios]);
-    }
-
-
     public function edit($id)
     {
         $user = User::findOrFail($id);
